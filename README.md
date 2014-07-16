@@ -3,10 +3,12 @@ Taxonomy-meta-fields-plugin-for-Wordpress
 
 Plugin to manage and use custom meta fields within builtin and custom taxonomies
 
-=== Category Meta plugin ===
+Category Meta plugin
+=========================================
 Contributors: Bas Matthee (v1.3), josecoelho, Randy Hoyt, steveclarkcouk, Vitaliy Kukin, Eric Le Bail, Tom Ransom
 
-== Update Log ==
+Update Log
+=========================================
 1.3   : Added WYSIWYG Editor support. Code refacturing and cleanup. Fixed bug with non-sanitized formfield names. Some minor bugfixing. CSS-file removed. User interface changed.
 
 1.2.8 : Add Brazilian Portuguesetranslation thanks to josecoelho
@@ -41,7 +43,8 @@ Contributors: Bas Matthee (v1.3), josecoelho, Randy Hoyt, steveclarkcouk, Vitali
 
 0.0.1 : plugin initial creation.
 
-== Installation ==
+Installation
+=========================================
 
 1. Unzip into your `/wp-content/plugins/` directory. If you're uploading it make sure to upload
 the top-level folder. Don't just upload all the php files and put them in `/wp-content/plugins/`.
