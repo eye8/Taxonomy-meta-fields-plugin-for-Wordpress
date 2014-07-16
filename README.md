@@ -1,10 +1,8 @@
 Taxonomy-meta-fields-plugin-for-Wordpress
 =========================================
 
-Plugin to manage and use custom meta fields within builtin and custom taxonomies
+Plugin to manage and use custom meta fields within builtin and custom taxonomies and terms
 
-Category Meta plugin
-=========================================
 Contributors: Bas Matthee (v1.3), josecoelho, Randy Hoyt, steveclarkcouk, Vitaliy Kukin, Eric Le Bail, Tom Ransom
 
 Update Log
