@@ -687,8 +687,8 @@ function wptm_add_meta_textinput($tag) {
                                         <?php _e('Click here to remove the existing image', 'wp-category-meta');?>
                                     </strong>
                         		</a><br />
-                    		</td>
-                    	</tr>
+                            </td>
+                        </tr>
                     
                 	<?php } elseif ($inputType == 'checkbox') { ?>
                     
@@ -706,17 +706,16 @@ function wptm_add_meta_textinput($tag) {
                     
                 }//end FOREACH
                 
-            }//end IF
-            
-        }// end IF ?>
+            }//end IF ?>
+                
+                
+            </table>
+            <textarea id="content" name="content" rows="100" cols="10" tabindex="2" onfocus="image_url_add()" style="width: 1px; height: 1px; padding: 0px; border: none display :   none;"></textarea>
+            <script type="text/javascript">edCanvas = document.getElementById('content');</script>
         
-        </table>
-        <textarea id="content" name="content" rows="100" cols="10" tabindex="2"
-        	onfocus="image_url_add()"
-        	style="width: 1px; height: 1px; padding: 0px; border: none display :   none;"></textarea>
-        <script type="text/javascript">edCanvas = document.getElementById('content');</script>
-    
-    </div>
+        </div>
+        
+    <?php }// end IF ?>
     
 <?php
 }
