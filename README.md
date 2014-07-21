@@ -1,15 +1,24 @@
-Taxonomy-meta-fields-plugin-for-Wordpress
-=========================================
+=== Custom taxonomy, category and term fields ===
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QNV6JFQWGSSSC
+Tags: taxonomy, meta, custom field, category meta, taxonomy meta, term meta, custom fields
+License URI: http://en.wikipedia.org/wiki/MIT_License
+Contributors: Bas Matthee
+Tested up to: 3.9.1
+License: MIT License
+Requires at least: 3.5.0
+Stable tag: 1.3
 
+== Description ==
 Plugin to manage and use custom meta fields within builtin and custom taxonomies
 
-Category Meta plugin
-=========================================
-Contributors: Bas Matthee (v1.3), josecoelho, Randy Hoyt, steveclarkcouk, Vitaliy Kukin, Eric Le Bail, Tom Ransom
+== Screenshots ==
 
-Update Log
-=========================================
-1.3   : Added WYSIWYG Editor support. Code refacturing and cleanup. Fixed bug with non-sanitized formfield names. Some minor bugfixing. CSS-file removed. User interface changed.
+1. The Settings-page where you can add the custom fields
+2. Example of the custom fields under the general category fields
+3. Example of the custom fields under the general category fields
+
+== Changelog ==
+1.3.0   : Added WYSIWYG Editor support. Code refacturing and cleanup. Fixed bug with non-sanitized formfield names. Some minor bugfixing. CSS-file removed. User interface changed.
 
 1.2.8 : Add Brazilian Portuguesetranslation thanks to josecoelho
 
@@ -43,9 +52,7 @@ Update Log
 
 0.0.1 : plugin initial creation.
 
-Installation
-=========================================
-
+== Installation ==
 1. Unzip into your `/wp-content/plugins/` directory. If you're uploading it make sure to upload
 the top-level folder. Don't just upload all the php files and put them in `/wp-content/plugins/`.
 2. Activate the plugin through the 'Plugins' menu in WordPress

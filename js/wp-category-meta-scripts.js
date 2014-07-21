@@ -19,10 +19,11 @@ function image_url_sync(){
 }
 
 function image_url_add(){
-	image_url = edCanvas.value.match(/img src=\"(.*?)\"/g)[0].split(/img src=\"(.*?)\"/g)[1];
+    enable = true;
+	image_url = edCanvas_temp.value.match(/img src=\"(.*?)\"/g)[0].split(/img src=\"(.*?)\"/g)[1];
     image_url = image_url.replace(/-[0-9][0-9][0-9]x[0-9][0-9][0-9]\./i,'.');
     image_url_collection = image_url;
-    edCanvas.value = '';
+    edCanvas_temp.value = '';
     image_url_sync();
 }
 
@@ -37,12 +38,21 @@ function remove_image_url($field, $message){
     jQuery(url_display_id).html($message);
 	jQuery('#' + $field).val('');
 	jQuery(image_display_id).html('');
+    return false;
 }
 
 jQuery(document).ready(function($) {
+    
+    if (enable) {
+        var original_send_to_editor = window.send_to_editor;
+    }
 	window.send_to_editor = function (html) {
-		tb_remove();		
-		edCanvas.value = html;
-		image_url_add();		
+		tb_remove();
+		edCanvas_temp.value = html;
+		image_url_add();
+        if (enable) {
+            window.send_to_editor = original_send_to_editor;
+        }
+        enable = false;		
 	}
-});	 
+});

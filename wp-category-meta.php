@@ -1,12 +1,12 @@
 <?php
 /*
- * Plugin Name: wp-category-meta
+ * Plugin Name: Custom taxonomy, category and term fields
  * Description: Add the ability to attach meta to the Wordpress categories
  * Version: 1.3
- * Author: Randy Hoyt, steveclarkcouk, Vitaliy Kukin, Eric Le Bail, Tom Ransom, Bas Matthee
+ * Author: Bas Matthee
  * Author URI: http://www.twitter.com/BasMatthee
  *
- * This plugin has been developped and tested with Wordpress Version 3.3.1
+ * This plugin has been developped and tested with Wordpress Version 3.9.1
  *
  * Copyright 2014  Bas Matthee (@BasMatthee)
  *
@@ -46,7 +46,7 @@ if (!defined('DIRECTORY_SEPARATOR')) {
     }
 }
 
-$pluginPath = ABSPATH.PLUGINDIR.DIRECTORY_SEPARATOR."wp-category-meta";
+$pluginPath = ABSPATH.PLUGINDIR.DIRECTORY_SEPARATOR."custom-taxonomy-category-and-term-fields";
 define('WPTM_PATH', $pluginPath);
 $filePath = $pluginPath.DIRECTORY_SEPARATOR.basename(__FILE__);
 $asolutePath = dirname(__FILE__).DIRECTORY_SEPARATOR;
@@ -155,8 +155,8 @@ function wptm_createTable($wpdb, $table_name) {
           PRIMARY KEY  (`meta_id`),
           KEY `terms_id` (`terms_id`),
           KEY `meta_key` (`meta_key`)
-        ) ENGINE=MyISAM AUTO_INCREMENT=6887 DEFAULT CHARSET=utf8;";
-
+        ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+    
     $results = $wpdb->query($sql);
     
 }
@@ -197,7 +197,7 @@ function wptm_init() {
         
         if ( !empty($locale) ) {
             
-            load_textdomain('wp-category-meta', WPTM_ABSPATH.'lang'.DIRECTORY_SEPARATOR.'wp-category-meta-'.$locale.'.mo');
+            load_textdomain('wp-category-meta', WPTM_ABSPATH.'lang'.DIRECTORY_SEPARATOR.'custom-taxonomy-category-and-term-fields-'.$locale.'.mo');
             
         }
         
@@ -247,7 +247,7 @@ function wptm_admin_enqueue_scripts() {
         wp_enqueue_script('thickbox');
         wp_enqueue_script('media-upload');
         wp_enqueue_script('quicktags');
-        wp_enqueue_script('wp-category-meta-scripts','/wp-content/plugins/wp-category-meta/js/wp-category-meta-scripts.js');
+        wp_enqueue_script('wp-category-meta-scripts','/wp-content/plugins/custom-taxonomy-category-and-term-fields/js/wp-category-meta-scripts.js');
         
     }
     
@@ -630,7 +630,7 @@ function wptm_add_meta_textinput($tag) {
                             </th>
                     		<td>
                                 <input value="<?php echo $inputValue ?>" type="text" size="40" name="<?php echo 'wptm_'.$inputName;?>" /><br />
-                    			<?php _e('This additionnal data is attached to the current term', 'wp-category-meta');?>
+                    			<?php _e('This additionnal data is attached to the current term', 'custom-taxonomy-category-and-term-fields');?>
                             </td>
                     	</tr>
                         
@@ -642,7 +642,7 @@ function wptm_add_meta_textinput($tag) {
                             </th>
                     		<td>
                                 <textarea name="<?php echo "wptm_".$inputName?>" rows="5" cols="50" class="large-text"><?php echo $inputValue ?></textarea><br />
-                                <?php _e('This additionnal data is attached to the current term', 'wp-category-meta');?>
+                                <?php _e('This additionnal data is attached to the current term', 'custom-taxonomy-category-and-term-fields');?>
                             </td>
                     	</tr>
                     
@@ -653,8 +653,8 @@ function wptm_add_meta_textinput($tag) {
                                 <label for="category_nicename"><?php echo $inputName;?></label>
                             </th>
                     		<td>
-                                <?php wp_editor($inputValue,"wptm_".str_replace(' ','_',$inputName)); ?>
-                                <?php _e('This additionnal data is attached to the current term', 'wp-category-meta');?>
+                                <?php wp_editor($inputValue,"wptm_".str_replace(' ','_',$inputName),array('textarea_name'=>"wptm_".str_replace(' ','_',$inputName))); ?>
+                                <?php _e('This additionnal data is attached to the current term', 'custom-taxonomy-category-and-term-fields');?>
                             </td>
                     	</tr>
                     
@@ -664,27 +664,27 @@ function wptm_add_meta_textinput($tag) {
                         
                     	<tr class="form-field">
                     		<th scope="row" valign="top">
-                                <label for="<?php echo "wptm_".$inputName;?>" class="wptm_meta_name_label"><?php echo $inputName;?></label>
+                                <label for="<?php echo "wptm_".str_replace(' ','_',$inputName);?>" class="wptm_meta_name_label"><?php echo $inputName;?></label>
                             </th>
                     		<td>
-                                <div id="<?php echo "wptm_".$inputName;?>_selected_image" class="wptm_selected_image">
+                                <div id="<?php echo "wptm_".str_replace(' ','_',$inputName);?>_selected_image" class="wptm_selected_image">
                                     <?php if ($current_image_url != '') echo '<img src="'.$current_image_url.'" style="max-width:100%;"/>';?>
                                 </div>
-                                <input type="text" name="<?php echo "wptm_".$inputName;?>" id="<?php echo "wptm_".$inputName;?>" value="<?php echo $current_image_url;?>" /><br />
+                                <input type="text" name="<?php echo "wptm_".str_replace(' ','_',$inputName);?>" id="<?php echo "wptm_".str_replace(' ','_',$inputName);?>" value="<?php echo $current_image_url;?>" /><br />
                                 <br />
                         		<img src="images/media-button-image.gif" alt="Add photos from your media" /> 
-                                <a href="media-upload.php?type=image&#038;wptm_send_label=<?php echo $inputName; ?>&#038;TB_iframe=1&#038;tab=library&#038;height=500&#038;width=640" onclick="image_photo_url_add('<?php echo "wptm_".$inputName;?>')" class="thickbox" title="Add an Image"> 
+                                <a href="media-upload.php?type=image&#038;wptm_send_label=<?php echo str_replace(' ','_',$inputName); ?>&#038;TB_iframe=1&#038;tab=library&#038;height=500&#038;width=640" onclick="image_photo_url_add('<?php echo "wptm_".str_replace(' ','_',$inputName);?>')" class="thickbox" title="Add an Image"> 
                                     <strong>
-                                        <?php echo _e('Click here to add/change your image', 'wp-category-meta');?>
+                                        <?php echo _e('Click here to add/change your image', 'custom-taxonomy-category-and-term-fields');?>
                                     </strong>
                         		</a><br />
                         		<small>
-                                    <?php echo _e('Note: To choose image click the "insert into post" button in the media uploader', 'wp-category-meta');?>
+                                    <?php echo _e('Note: To choose image click the "insert into post" button in the media uploader', 'custom-taxonomy-category-and-term-fields');?>
                         		</small><br />
                         		<img src="images/media-button-image.gif" alt="Remove existing image" />
-                        		<a href="#" onclick="remove_image_url('<?php echo "wptm_".$inputName;?>','<?php _e('No image selected', 'wp-category-meta');?>')">
+                        		<a href="#" onclick="remove_image_url('<?php echo "wptm_".str_replace(' ','_',$inputName);?>','<?php _e('No image selected', 'custom-taxonomy-category-and-term-fields');?>');return false;">
                                     <strong>
-                                        <?php _e('Click here to remove the existing image', 'wp-category-meta');?>
+                                        <?php _e('Click here to remove the existing image', 'custom-taxonomy-category-and-term-fields');?>
                                     </strong>
                         		</a><br />
                             </td>
@@ -710,8 +710,8 @@ function wptm_add_meta_textinput($tag) {
                 
                 
             </table>
-            <textarea id="content" name="content" rows="100" cols="10" tabindex="2" onfocus="image_url_add()" style="width: 1px; height: 1px; padding: 0px; border: none;display :   none;"></textarea>
-            <script type="text/javascript">edCanvas = document.getElementById('content');</script>
+            <textarea id="content_temp" name="content_temp" rows="100" cols="10" tabindex="2" onfocus="image_url_add()" style="width: 1px; height: 1px; padding: 0px; border: none;display :   none;"></textarea>
+            <script type="text/javascript">edCanvas_temp = document.getElementById('content_temp');enable=false;</script>
         
         </div>
         
