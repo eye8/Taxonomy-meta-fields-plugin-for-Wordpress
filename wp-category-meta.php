@@ -520,7 +520,7 @@ function wptm_save_meta_tags($id) {
         
         foreach ($metaList as $inputName => $inputType) {
         
-            if ($inputType['taxonomy'] == $_POST['taxonomy']) {
+            //if ($inputType['taxonomy'] == $_POST['taxonomy']) {
                 
                 // Replace spaces with underscores for nomn-sanitized input names
                 $inputValue = $_POST['wptm_'.str_replace(' ','_',$inputName)];
@@ -533,7 +533,7 @@ function wptm_save_meta_tags($id) {
                     
                 }
                 
-            }
+            //}
         
         }
         
